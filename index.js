@@ -1,14 +1,18 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const execSync = require('child_process').execSync;
+const exec = require('@actions/exec').exec;
 
 try {
     // `who-to-greet` input defined in action metadata file
     const nameToGreet = core.getInput('who-to-greet');
     console.log(`Hello ${nameToGreet}!`);
 
-    const emailOutput = execSync('git config --global user.email "test@gmail.com"');
-    console.log(`emailOutput: ${emailOutput}`);
+    const emailOutput = exec('git config --global user.email "test@gmail.com"').then(() => {
+        console.log(`emailOutput: ${emailOutput}`);
+    });
+    //const emailOutput = execSync('git config --global user.email "test@gmail.com"');
+    //console.log(`emailOutput: ${emailOutput}`);
 
     const usernameOutput = execSync('git config --global user.name "Test Github Action"');
     console.log(`usernameOutput: ${usernameOutput}`);
