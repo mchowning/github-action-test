@@ -6,9 +6,13 @@ try {
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
   console.log(`Hello ${nameToGreet}!`);
+
+  const output = execSync('git status');
+  console.log(`output of: "${output}"`);
+
   const time = (new Date()).toTimeString();
-  const output = execSync('git status')
-  core.setOutput("output of: ", output);
+  core.setOutput("time: ", time);
+
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
