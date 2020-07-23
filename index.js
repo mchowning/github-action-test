@@ -7,6 +7,12 @@ try {
     const nameToGreet = core.getInput('who-to-greet');
     console.log(`Hello ${nameToGreet}!`);
 
+    const emailOutput = execSync('git config --global user.email "test@gmail.com"');
+    console.log(`emailOutput: ${emailOutput}`);
+
+    const usernameOutput = execSync('git config --global user.name "Test Github Action"');
+    console.log(`usernameOutput: ${usernameOutput}`);
+
     const filename = 'added_from_action';
     const touchOutput = execSync(`touch ${filename}`);
     console.log(`touchOutput: ${touchOutput}`);
